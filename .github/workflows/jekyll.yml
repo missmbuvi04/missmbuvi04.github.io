@@ -1,0 +1,43 @@
+name: Jekyll Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Build Jekyll Site
+        run: bundle exec jekyll build
+```
+
+Save and close.
+
+---
+
+**Your submission answers:**
+
+**Project Title:**
+> Automated Jekyll Site Build
+
+**What task did you automate?**
+> I automated building the Jekyll site using the `jekyll build` command. The workflow runs automatically whenever a pull request is created or code is pushed to the main branch, checking that the site builds successfully before changes are merged.
+
+**Why did you choose this task?**
+> Building a Jekyll site reports any errors that would prevent GitHub Pages from building and publishing the site. For example, there might be syntax errors in templates or broken links. These errors should be caught before merging changes, as they would break the live site. Automating this task provides fast feedback and ensures that only working changes are merged into the main branch, which aligns with DevSecOps principles of continuous integration and working safely.
+
+**How did you automate it?**
+> The task is automated using the `jekyll build` command inside a GitHub Actions workflow stored in `.github/workflows/jekyll.yml`. The workflow sets up Ruby, installs dependencies using Bundler, and then runs `jekyll build` to verify the site builds without errors. It is triggered on both push and pull request events targeting the main branch.
+
+---
